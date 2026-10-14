@@ -1,11 +1,20 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  --color-accent: #8b5cf6;
+  --color-accent-light: #a78bfa;
+  --color-marked: #b9fbc0;
+  --color-marked-border: #5eead4;
+  --color-bingo: #fcd34d;
+  --font-display: 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+:root {
+  color: #f8fafc;
+  background: #120f2b;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
 html,
@@ -16,6 +25,54 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 8%, rgb(91 33 182 / 0.52), transparent 30rem),
+    radial-gradient(circle at 88% 18%, rgb(6 182 212 / 0.28), transparent 26rem),
+    radial-gradient(circle at 50% 110%, rgb(244 63 94 / 0.22), transparent 34rem),
+    #120f2b;
   -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [class*='transition-'],
+  [class*='animate-'] {
+    transition: none;
+    animation: none;
+  }
 }

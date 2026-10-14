@@ -7,17 +7,19 @@ interface BingoBoardProps {
   onSquareClick: (squareId: number) => void;
 }
 
-export function BingoBoard({ board, winningSquareIds, onSquareClick }: BingoBoardProps) {
+export function BingoBoard({ board, winningSquareIds, onSquareClick }: Readonly<BingoBoardProps>) {
   return (
-    <div className="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
-      {board.map((square) => (
-        <BingoSquare
-          key={square.id}
-          square={square}
-          isWinning={winningSquareIds.has(square.id)}
-          onClick={() => onSquareClick(square.id)}
-        />
-      ))}
+    <div className="w-full max-w-2xl rounded-[1.75rem] border border-white/20 bg-white/10 p-2 shadow-2xl shadow-indigo-950/35 backdrop-blur-xl sm:p-3">
+      <div className="grid min-h-[22rem] w-full grid-cols-5 gap-1.5 sm:aspect-square sm:min-h-0 sm:gap-2">
+        {board.map((square) => (
+          <BingoSquare
+            key={square.id}
+            square={square}
+            isWinning={winningSquareIds.has(square.id)}
+            onClick={() => onSquareClick(square.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

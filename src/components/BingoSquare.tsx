@@ -6,17 +6,18 @@ interface BingoSquareProps {
   onClick: () => void;
 }
 
-export function BingoSquare({ square, isWinning, onClick }: BingoSquareProps) {
+export function BingoSquare({ square, isWinning, onClick }: Readonly<BingoSquareProps>) {
   const baseClasses =
-    'relative flex items-center justify-center p-1 text-center border border-gray-300 rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight';
+    'relative flex min-h-0 select-none items-center justify-center overflow-hidden rounded-xl border p-1 text-center text-[0.58rem] font-medium leading-tight transition-all duration-200 sm:min-h-[4.8rem] sm:p-2 sm:text-xs';
 
-  const stateClasses = square.isMarked
-    ? isWinning
-      ? 'bg-amber-200 border-amber-400 text-amber-900'
-      : 'bg-marked border-marked-border text-green-800'
-    : 'bg-white text-gray-700 active:bg-gray-100';
+  let stateClasses = 'border-white/20 bg-white/10 text-slate-100/85 hover:-translate-y-0.5 hover:border-cyan-200/60 hover:bg-white/20 active:scale-95';
+  if (square.isMarked && isWinning) {
+    stateClasses = 'border-amber-200/80 bg-gradient-to-br from-amber-200/90 to-orange-300/80 text-amber-950 shadow-lg shadow-amber-300/20';
+  } else if (square.isMarked) {
+    stateClasses = 'border-lime-200/60 bg-gradient-to-br from-lime-200/85 to-emerald-300/75 text-emerald-950 shadow-md shadow-emerald-950/20';
+  }
 
-  const freeSpaceClasses = square.isFreeSpace ? 'font-bold text-sm' : '';
+  const freeSpaceClasses = square.isFreeSpace ? 'border-cyan-200/70 bg-cyan-200/20 font-bold text-cyan-100 sm:text-sm' : '';
 
   return (
     <button
@@ -28,7 +29,7 @@ export function BingoSquare({ square, isWinning, onClick }: BingoSquareProps) {
     >
       <span className="wrap-break-word hyphens-auto">{square.text}</span>
       {square.isMarked && !square.isFreeSpace && (
-        <span className="absolute top-0.5 right-0.5 text-green-600 text-xs">✓</span>
+        <span className="absolute right-1 top-1 text-xs font-black text-emerald-800" aria-hidden="true">+</span>
       )}
     </button>
   );
